@@ -1,8 +1,7 @@
 package com.youcode.BAMCoReport.Services;
 
-import com.youcode.BAMCoReport.DTO.Models.UserModel;
+import com.youcode.BAMCoReport.DTO.Models.UserDTO;
 import com.youcode.BAMCoReport.DTO.Services.IMapClassWithDto;
-import com.youcode.BAMCoReport.Entities.Profile;
 import com.youcode.BAMCoReport.Entities.User;
 import com.youcode.BAMCoReport.Repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class UserService {
 
     private final IUserRepository userRepository;
     @Autowired
-    IMapClassWithDto<User, UserModel> userMapping;
+    IMapClassWithDto<User, UserDTO> userMapping;
 
 
     @Autowired
@@ -29,9 +28,9 @@ public class UserService {
 
 
     //get method
-    public List<UserModel> getUsers() {
+    public List<UserDTO> getUsers() {
         List<User> usersList = userRepository.findAll();
-        return userMapping.convertListToListDto(usersList, UserModel.class);
+        return userMapping.convertListToListDto(usersList, UserDTO.class);
     }
 
 

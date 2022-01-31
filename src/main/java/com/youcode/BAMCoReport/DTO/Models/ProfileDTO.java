@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ProfileModel {
+public class ProfileDTO {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

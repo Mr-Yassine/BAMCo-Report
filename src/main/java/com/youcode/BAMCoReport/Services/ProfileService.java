@@ -1,15 +1,13 @@
 package com.youcode.BAMCoReport.Services;
 
-import com.youcode.BAMCoReport.DTO.Models.ProfileModel;
+import com.youcode.BAMCoReport.DTO.Models.ProfileDTO;
 import com.youcode.BAMCoReport.DTO.Services.IMapClassWithDto;
 import com.youcode.BAMCoReport.Entities.Profile;
-import com.youcode.BAMCoReport.Entities.User;
 import com.youcode.BAMCoReport.Repositories.IProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -20,7 +18,7 @@ public class ProfileService {
 
     private final IProfileRepository profileRepository;
     @Autowired
-    IMapClassWithDto<Profile, ProfileModel> profileMapping;
+    IMapClassWithDto<Profile, ProfileDTO> profileMapping;
 
 
     @Autowired
@@ -30,9 +28,9 @@ public class ProfileService {
 
 
     //Get method
-    public List<ProfileModel> getProfiles() {
+    public List<ProfileDTO> getProfiles() {
         List<Profile> profilesList = profileRepository.findAll();
-        return profileMapping.convertListToListDto(profilesList, ProfileModel.class);
+        return profileMapping.convertListToListDto(profilesList, ProfileDTO.class);
     }
 
 

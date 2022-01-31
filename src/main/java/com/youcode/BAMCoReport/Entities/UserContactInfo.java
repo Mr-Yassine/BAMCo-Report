@@ -2,7 +2,6 @@ package com.youcode.BAMCoReport.Entities;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User_contactInfo {
+public class UserContactInfo {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -43,7 +42,7 @@ public class User_contactInfo {
     private User user_id;
 
 
-    public User_contactInfo(String email, String phone, User user_id) {
+    public UserContactInfo(String email, String phone, User user_id) {
         this.email = email;
         this.phone = phone;
         this.user_id = user_id;

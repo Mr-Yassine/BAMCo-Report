@@ -1,7 +1,6 @@
 package com.youcode.BAMCoReport.Entities;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,11 +32,11 @@ public class User implements Serializable {
     private LocalDate lastUpdate;
 
 
-    @OneToOne(targetEntity = User_contactInfo.class, mappedBy = "user_id")
-    private User_contactInfo contactInfo;
+    @OneToOne(targetEntity = UserContactInfo.class, mappedBy = "user_id")
+    private UserContactInfo contactInfo;
 
 
-    public User(Long id, String username, String password, String firstName, String jobTitle, User_contactInfo contactInfo) {
+    public User(Long id, String username, String password, String firstName, String jobTitle, UserContactInfo contactInfo) {
         this.id = id;
         this.username = username;
         this.password = password;

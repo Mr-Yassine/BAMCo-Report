@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 @Getter
 @Setter
-public class ContactInfoModel {
+public class ContactInfoDTO {
 
 
     @Id

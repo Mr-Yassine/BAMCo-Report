@@ -1,8 +1,7 @@
 package com.youcode.BAMCoReport.DTO.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.youcode.BAMCoReport.Entities.User;
-import com.youcode.BAMCoReport.Entities.User_contactInfo;
+import com.youcode.BAMCoReport.Entities.UserContactInfo;
 import lombok.*;
 
 
@@ -17,7 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserModel {
+public class UserDTO {
 
 
     @Id
@@ -42,6 +41,6 @@ public class UserModel {
     @JsonIgnore
     private LocalDate lastUpdate;
 
-    private User_contactInfo contactInfo;
+    private UserContactInfo contactInfo;
 
 }
