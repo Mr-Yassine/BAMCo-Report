@@ -1,6 +1,8 @@
 package com.youcode.BAMCoReport.Entities;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,11 +22,16 @@ public class Profile {
     private boolean isDefault;
     private String name;
     private String description;
+    @CreationTimestamp
     private LocalDate creationDate;
-    private String createdBy;
     private String lastUpdateBy;
+    @UpdateTimestamp
     private LocalDate lastUpdate;
 
+
+    @ManyToOne()
+    @JoinColumn(name = "createdBy", referencedColumnName = "createdBy")
+    private User createdBy;
 
 
     public Profile(Long id, String name, String description, LocalDate creationDate) {

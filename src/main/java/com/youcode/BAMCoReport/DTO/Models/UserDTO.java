@@ -1,11 +1,13 @@
 package com.youcode.BAMCoReport.DTO.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.youcode.BAMCoReport.Entities.UserContactInfo;
+import com.youcode.BAMCoReport.Entities.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 
@@ -18,29 +20,24 @@ import java.time.LocalDate;
 @ToString
 public class UserDTO {
 
-
     @Id
-    @JsonIgnore
     private Long id;
-    @JsonIgnore
     private boolean enabled;
     private String username;
     private String password;
     private String firstName;
-    @JsonIgnore
     private String lastName;
-    @JsonIgnore
     private String title;
     private String jobTitle;
-    @JsonIgnore
-    private Long managerUserId;
-    @JsonIgnore
-    private String createdBy;
-    @JsonIgnore
     private LocalDate creationDate;
-    @JsonIgnore
     private LocalDate lastUpdate;
 
+    private User managerUserId;
+    private User createdBy;
     private UserContactInfo contactInfo;
+    private Group group;
+    private Profile profile;
+    private Role role;
+
 
 }

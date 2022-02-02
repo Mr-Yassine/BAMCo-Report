@@ -27,6 +27,8 @@ public class UserService {
     }
 
 
+
+
     //get methods
     public List<UserDTO> getUsers() {
         List<User> usersList = userRepository.findAll();
@@ -35,6 +37,8 @@ public class UserService {
     public User getUserById(String username) {
         return userRepository.findUserByUsername(username).orElse(null);
     }
+
+
 
 
 
@@ -52,6 +56,8 @@ public class UserService {
 
 
 
+
+
     //delete method
     public void deleteUser(Long id) {
         boolean exists = userRepository.existsById(id);
@@ -60,6 +66,9 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
+
+
+
 
 
     //update method

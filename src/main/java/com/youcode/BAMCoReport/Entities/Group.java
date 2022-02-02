@@ -1,6 +1,9 @@
 package com.youcode.BAMCoReport.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,9 +24,20 @@ public class Group {
     private String parentPath;
     private String displayName;
     private String description;
-    private String createdBy;
+    @CreationTimestamp
     private LocalDate creationDate;
+    @UpdateTimestamp
     private LocalDate lastUpdate;
+
+
+
+    @ManyToOne()
+    @JoinColumn(name = "createdBy", referencedColumnName = "createdBy")
+    private User createdBy;
+
+
+
+
 
 
     @Override

@@ -1,6 +1,8 @@
 package com.youcode.BAMCoReport.Entities;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,11 +22,15 @@ public class Role {
     private String name;
     private String displayName;
     private String description;
-    private String createdBy;
+    @CreationTimestamp
     private LocalDate creationDate;
+    @UpdateTimestamp
     private LocalDate lastUpdateDate;
 
 
+    @ManyToOne()
+    @JoinColumn(name = "createdBy", referencedColumnName = "id")
+    private User createdBy;
 
 
     @Override

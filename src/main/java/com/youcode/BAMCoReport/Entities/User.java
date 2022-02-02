@@ -1,7 +1,10 @@
 package com.youcode.BAMCoReport.Entities;
 
 
+import jdk.jfr.Timestamp;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,14 +29,35 @@ public class User implements Serializable {
     private String lastName;
     private String title;
     private String jobTitle;
-    private Long managerUserId;
-    private String createdBy;
+    @CreationTimestamp
     private LocalDate creationDate;
+    @UpdateTimestamp
     private LocalDate lastUpdate;
+
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    private User managerUserId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="createdby")
+    private User createdBy;
+
 
 
     @OneToOne(targetEntity = UserContactInfo.class, mappedBy = "user_id")
     private UserContactInfo contactInfo;
+
+    @ManyToOne()
+    private Group group;
+
+    @ManyToOne()
+    private Profile profile;
+
+    @ManyToOne()
+    private Role role;
+
 
 
     public User(Long id, String username, String password, String firstName, String jobTitle, UserContactInfo contactInfo) {

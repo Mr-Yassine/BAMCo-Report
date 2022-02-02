@@ -34,10 +34,14 @@ public class UserController {
     }
 
 
-    @PostMapping
+
+
+
+    @PostMapping("/addUser")
     public void addNewUser (@RequestBody User user) {
         userService.addNewUser(user);
     }
+
 
 
 
