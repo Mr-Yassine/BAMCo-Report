@@ -32,6 +32,9 @@ public class ProfileService {
         List<Profile> profilesList = profileRepository.findAll();
         return profileMapping.convertListToListDto(profilesList, ProfileDTO.class);
     }
+    public Profile getProfileById(Long id) {
+        return profileRepository.findProfileById(id).orElse(null);
+    }
 
 
     //add method
@@ -65,6 +68,8 @@ public class ProfileService {
         }
 
     }
+
+
 }
 
 

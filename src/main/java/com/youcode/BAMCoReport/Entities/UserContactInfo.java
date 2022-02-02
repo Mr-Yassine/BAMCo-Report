@@ -37,7 +37,7 @@ public class UserContactInfo {
 
 
     @JsonBackReference
-    @OneToOne(targetEntity = User.class)
+    @OneToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user_id;
 

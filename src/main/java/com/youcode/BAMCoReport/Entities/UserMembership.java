@@ -25,6 +25,12 @@ public class UserMembership {
 
 
 
+    public UserMembership(Long id, Long userId, Long roleId, Long groupId) {
+        this.id = id;
+        this.userId = userId;
+        this.roleId = roleId;
+        this.groupId = groupId;
+    }
 
     @Override
     public String toString() {

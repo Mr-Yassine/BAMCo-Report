@@ -27,10 +27,13 @@ public class UserService {
     }
 
 
-    //get method
+    //get methods
     public List<UserDTO> getUsers() {
         List<User> usersList = userRepository.findAll();
         return userMapping.convertListToListDto(usersList, UserDTO.class);
+    }
+    public User getUserById(String username) {
+        return userRepository.findUserByUsername(username).orElse(null);
     }
 
 
@@ -45,6 +48,8 @@ public class UserService {
 
         userRepository.save(user);
     }
+
+
 
 
     //delete method
@@ -91,5 +96,6 @@ public class UserService {
 
 
     }
+
 
 }

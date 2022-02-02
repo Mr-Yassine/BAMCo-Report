@@ -3,6 +3,7 @@ package com.youcode.BAMCoReport.Controllers;
 
 import com.youcode.BAMCoReport.DTO.Models.ProfileDTO;
 import com.youcode.BAMCoReport.Entities.Profile;
+import com.youcode.BAMCoReport.Entities.User;
 import com.youcode.BAMCoReport.Services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,10 @@ public class ProfileController {
     @GetMapping
     public List<ProfileDTO> getProfiles() {
         return profileService.getProfiles();
+    }
+    @GetMapping("/findBy/{id}")
+    public Profile findProfile(@PathVariable Long id){
+        return profileService.getProfileById(id);
     }
 
     @PostMapping

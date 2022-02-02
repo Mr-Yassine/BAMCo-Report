@@ -28,13 +28,21 @@ public class UserController {
     public List<UserDTO> getUsers() {
         return userService.getUsers();
     }
+    @GetMapping("/findBy/{username}")
+    public User findUser(@PathVariable String username){
+        return userService.getUserById(username);
+    }
+
 
     @PostMapping
     public void addNewUser (@RequestBody User user) {
         userService.addNewUser(user);
     }
 
-    @PutMapping(path = "{id}")
+
+
+
+    @PutMapping(path = "/update/{id}")
     public void UpdateUser (
             @PathVariable ("id") Long id,
             @RequestParam (required = false) String username,
@@ -46,7 +54,7 @@ public class UserController {
 
     }
 
-    @DeleteMapping(path = "{id}")
+    @DeleteMapping(path = "/delete/{id}")
     public void DeleteUser (@PathVariable ("id") Long id) {
         userService.deleteUser(id);
     }
