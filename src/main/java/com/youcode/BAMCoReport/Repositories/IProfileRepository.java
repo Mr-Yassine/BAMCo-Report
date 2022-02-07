@@ -10,5 +10,4 @@ import java.util.Optional;
 @Repository
 public interface IProfileRepository extends JpaRepository<Profile, Long> {
     Optional <Profile> findProfileByName (String name);
-    Optional<Profile> findProfileById(Long id);
 }

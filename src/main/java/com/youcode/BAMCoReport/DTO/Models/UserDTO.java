@@ -2,17 +2,14 @@ package com.youcode.BAMCoReport.DTO.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.youcode.BAMCoReport.Entities.*;
+import io.swagger.annotations.ApiModel;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-
-import javax.persistence.*;
 import java.time.LocalDate;
 
 
 
-
+@ApiModel("User")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,24 +17,30 @@ import java.time.LocalDate;
 @ToString
 public class UserDTO {
 
-    @Id
+
+
     private Long id;
     private boolean enabled;
     private String username;
+    @JsonIgnore
     private String password;
     private String firstName;
+    @JsonIgnore
     private String lastName;
+    @JsonIgnore
     private String title;
     private String jobTitle;
     private LocalDate creationDate;
     private LocalDate lastUpdate;
+    private User lastUpdateBy;
 
-    private User managerUserId;
-    private User createdBy;
     private UserContactInfo contactInfo;
-    private Group group;
-    private Profile profile;
-    private Role role;
+    private User createdBy;
+    private User managerUserId;
+
+
+
+
 
 
 }

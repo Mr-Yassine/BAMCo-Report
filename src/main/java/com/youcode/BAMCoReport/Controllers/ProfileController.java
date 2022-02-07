@@ -3,13 +3,12 @@ package com.youcode.BAMCoReport.Controllers;
 
 import com.youcode.BAMCoReport.DTO.Models.ProfileDTO;
 import com.youcode.BAMCoReport.Entities.Profile;
-import com.youcode.BAMCoReport.Entities.User;
+import com.youcode.BAMCoReport.Responses.Responses;
 import com.youcode.BAMCoReport.Services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 @RestController
 @RequestMapping(path = "/api/profile")
@@ -23,28 +22,45 @@ public class ProfileController {
     }
 
 
+    //Get methods
     @GetMapping
     public List<ProfileDTO> getProfiles() {
         return profileService.getProfiles();
     }
-    @GetMapping("/findBy/{id}")
-    public Profile findProfile(@PathVariable Long id){
-        return profileService.getProfileById(id);
+    @GetMapping("/findBy/{name}")
+    public Profile findProfile(@PathVariable String name){
+        return profileService.getProfileByName(name);
     }
 
-    @PostMapping
-    public void addNewProfile (@RequestBody Profile profile) {
+
+
+    //Post method
+    @PostMapping("/add")
+    @ResponseBody
+    public Responses addNewProfile (@RequestBody Profile profile) {
         profileService.addNewProfile(profile);
+        return new Responses ("Profile added successfully");
     }
 
-    @PutMapping(path = "{id}")
-    public void UpdateProfile (
-            @PathVariable ("id") Long id,
-            @RequestParam (required = false) String name,
-            @RequestParam (required = false) String description) {
 
-        profileService.updateProfile(id, name, description);
 
+    //Update methods
+    @PutMapping ("/update")
+    @ResponseBody
+    public Responses updateProfile (@RequestBody Profile profile) {
+        profileService.updateProfile(profile);
+        return new Responses ("Profile updated successfully");
+    }
+
+
+
+
+    //Delete method
+    @DeleteMapping(path = "/delete/{id}")
+    @ResponseBody
+    public Responses deleteProfile (@PathVariable ("id") Long id) {
+        profileService.deleteProfile(id);
+        return new Responses ("Profile deleted successfully");
     }
 
 }

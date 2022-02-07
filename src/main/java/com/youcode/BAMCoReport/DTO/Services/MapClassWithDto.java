@@ -38,8 +38,11 @@ public class MapClassWithDto<E, D> implements IMapClassWithDto<E, D> {
 
     @Override
     public List<D> convertListToListDto(Collection<E> entityList, Class<D> outCLass) {
-        if(entityList == null)
+        if(entityList == null){
+            System.out.println("it null");
             return Collections.emptyList();
+        }
+
 
         return entityList.stream().map(entity -> convertToDto(entity, outCLass)).collect(Collectors.toList());
     }

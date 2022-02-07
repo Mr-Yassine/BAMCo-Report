@@ -1,9 +1,13 @@
 package com.youcode.BAMCoReport.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.youcode.BAMCoReport.DTO.Models.ContactInfoDTO;
+import com.youcode.BAMCoReport.DTO.Models.UserDTO;
 import jdk.jfr.Timestamp;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -12,6 +16,7 @@ import java.time.LocalDate;
 
 
 @Entity
+@DynamicUpdate
 @Table (name = "Users")
 @Getter
 @Setter
@@ -21,72 +26,53 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long id;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean enabled;
     private String username;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String firstName;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String lastName;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String title;
     private String jobTitle;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @CreationTimestamp
     private LocalDate creationDate;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @UpdateTimestamp
     private LocalDate lastUpdate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="lastupdateby")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private User lastUpdateBy;
 
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User managerUserId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="createdby")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User createdBy;
 
 
 
-    @OneToOne(targetEntity = UserContactInfo.class, mappedBy = "user_id")
+    @OneToOne(targetEntity = UserContactInfo.class, cascade = CascadeType.ALL, mappedBy = "user_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private UserContactInfo contactInfo;
 
-    @ManyToOne()
-    private Group group;
-
-    @ManyToOne()
-    private Profile profile;
-
-    @ManyToOne()
-    private Role role;
-
-
-
-    public User(Long id, String username, String password, String firstName, String jobTitle, UserContactInfo contactInfo) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.jobTitle = jobTitle;
-        this.contactInfo = contactInfo;
-    }
 
 
 
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", enabled=" + enabled +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", title='" + title + '\'' +
-                ", jobTitle='" + jobTitle + '\'' +
-                ", managerUserId=" + managerUserId +
-                ", createdBy='" + createdBy + '\'' +
-                ", creationDate=" + creationDate +
-                ", lastUpdate=" + lastUpdate +
-                '}';
-    }
+
+
 }

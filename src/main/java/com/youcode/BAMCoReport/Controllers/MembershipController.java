@@ -2,6 +2,7 @@ package com.youcode.BAMCoReport.Controllers;
 
 import com.youcode.BAMCoReport.DTO.Models.MembershipDTO;
 import com.youcode.BAMCoReport.Entities.UserMembership;
+import com.youcode.BAMCoReport.Responses.Responses;
 import com.youcode.BAMCoReport.Services.MembershipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,26 +26,25 @@ public class MembershipController {
     public List<MembershipDTO> getMembership() {
         return membershipService.getMembership();
     }
+    @GetMapping("/findBy/{id}")
+    public UserMembership findMembership(@PathVariable Long id){
+        return membershipService.getMembershipBy(id);
+    }
 
-    @PostMapping
-    public void addNewMembership (@RequestBody UserMembership userMembership) {
+
+    @PostMapping("/add")
+    @ResponseBody
+    public Responses addNewMembership (@RequestBody UserMembership userMembership) {
         membershipService.addNewMembership(userMembership);
+        return new Responses ("Membership added successfully");
     }
 
-    @PutMapping(path = "{id}")
-    public void UpdateMembership (
-            @PathVariable ("id") Long id,
-            @RequestParam (required = false) String username,
-            @RequestParam (required = false) String password,
-            @RequestParam (required = false) String firstName,
-            @RequestParam (required = false) String jobTitle) {
 
-        membershipService.updateMembership(id, username, password, firstName, jobTitle);
 
-    }
-
-    @DeleteMapping(path = "{id}")
-    public void DeleteMembership (@PathVariable ("id") Long id) {
+    @DeleteMapping(path = "/delete/{id}")
+    @ResponseBody
+    public Responses DeleteMembership (@PathVariable ("id") Long id) {
         membershipService.deleteMembership(id);
+        return new Responses ("Membership deleted successfully");
     }
 }

@@ -7,7 +7,5 @@ import java.util.Optional;
 
 
 public interface IGroupRepository extends JpaRepository<Group, Long> {
-
-    Optional<Group> findGroupById (Long id);
-
+    Optional<Group> findGroupByName(String name);
 }

@@ -3,6 +3,7 @@ package com.youcode.BAMCoReport.Entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 
 
 @Entity
+@DynamicUpdate
 @Table(name = "Groups")
 @Getter
 @Setter
@@ -32,13 +34,18 @@ public class Group {
 
 
     @ManyToOne()
-    @JoinColumn(name = "createdBy", referencedColumnName = "createdBy")
+    @JoinColumn(name = "createdBy", referencedColumnName = "id")
     private User createdBy;
 
 
-
-
-
+    public Group(Long id, String name, String description, LocalDate creationDate, LocalDate lastUpdate, User createdBy) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.creationDate = creationDate;
+        this.lastUpdate = lastUpdate;
+        this.createdBy = createdBy;
+    }
 
     @Override
     public String toString() {

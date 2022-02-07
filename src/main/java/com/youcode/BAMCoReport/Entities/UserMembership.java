@@ -2,11 +2,14 @@ package com.youcode.BAMCoReport.Entities;
 
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@DynamicUpdate
 @Table
 @Getter
 @Setter
@@ -17,20 +20,27 @@ public class UserMembership {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
-    private Long roleId;
-    private Long groupId;
-    private String assignedBy;
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User userId;
+    @ManyToOne
+    @JoinColumn(name = "roleId")
+    private Role roleId;
+    @ManyToOne
+    @JoinColumn(name = "groupId")
+    private Group groupId;
+    @ManyToOne
+    @JoinColumn(name = "assignedBy")
+    private User assignedBy;
+    @CreationTimestamp
     private LocalDate assignedDate;
 
 
+    @ManyToOne()
+    @JoinColumn(name = "createdBy", referencedColumnName = "id")
+    private User createdBy;
 
-    public UserMembership(Long id, Long userId, Long roleId, Long groupId) {
-        this.id = id;
-        this.userId = userId;
-        this.roleId = roleId;
-        this.groupId = groupId;
-    }
+
 
     @Override
     public String toString() {

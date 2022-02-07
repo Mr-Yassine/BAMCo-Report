@@ -2,6 +2,7 @@ package com.youcode.BAMCoReport.Entities;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 
 
 @Entity
+@DynamicUpdate
 @Table
 @Getter
 @Setter

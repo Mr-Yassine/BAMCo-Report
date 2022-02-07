@@ -19,6 +19,7 @@ public class MembershipService {
 
     private final IMembershipRepository membershipRepository;
 
+
     @Autowired
     IMapClassWithDto<UserMembership, MembershipDTO> membershipMapping;
 
@@ -32,7 +33,11 @@ public class MembershipService {
     //get method
     public List<MembershipDTO> getMembership() {
         List<UserMembership> membershipList = membershipRepository.findAll();
+        System.out.println("list" + membershipList);
         return membershipMapping.convertListToListDto(membershipList, MembershipDTO.class);
+    }
+    public UserMembership getMembershipBy(Long id) {
+        return membershipRepository.findMembershipById(id).orElse(null);
     }
 
 
@@ -58,6 +63,5 @@ public class MembershipService {
         membershipRepository.deleteById(id);
     }
 
-    public void updateMembership(Long id, String username, String password, String firstName, String jobTitle) {
-    }
+
 }

@@ -1,16 +1,30 @@
 package com.youcode.BAMCoReport.DTO.Models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+import com.youcode.BAMCoReport.Entities.Group;
+import com.youcode.BAMCoReport.Entities.ProfileMember;
+import com.youcode.BAMCoReport.Entities.Role;
+import com.youcode.BAMCoReport.Entities.User;
+import io.swagger.annotations.ApiModel;
+import lombok.*;
+
 import javax.persistence.Id;
 
+
+
+@ApiModel("ProfileMember")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class ProfileMemberDTO {
 
 
     @Id
     private Long id;
-    private Long profileId;
-    private Long userId;
-    private Long groupId;
-    private Long roleId;
+    private ProfileMember profileId;
+    private User userId;
+    private Group groupId;
+    private Role roleId;
 }

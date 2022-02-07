@@ -1,11 +1,13 @@
 package com.youcode.BAMCoReport.Entities;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 
 @Entity
+@DynamicUpdate
 @Table
 @Getter
 @Setter
@@ -17,10 +19,18 @@ public class ProfileMember {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private Long profileId;
-    private Long userId;
-    private Long groupId;
-    private Long roleId;
+    @ManyToOne
+    @JoinColumn(name = "profileId")
+    private Profile profileId;
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User userId;
+    @ManyToOne
+    @JoinColumn(name = "groupId")
+    private Group groupId;
+    @ManyToOne
+    @JoinColumn(name = "roleId")
+    private Role roleId;
 
 
     @Override
