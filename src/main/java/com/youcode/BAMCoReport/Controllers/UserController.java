@@ -5,9 +5,12 @@ import com.youcode.BAMCoReport.Entities.User;
 import com.youcode.BAMCoReport.Responses.Responses;
 import com.youcode.BAMCoReport.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -48,19 +51,6 @@ public class UserController {
 
 
     //Update method
-    @PatchMapping(path = "/patch/{id}")
-    @ResponseBody
-    public Responses UpdateUser (
-            @PathVariable ("id") Long id,
-            @RequestParam (required = false) String username,
-            @RequestParam (required = false) String password,
-            @RequestParam (required = false) String firstName,
-            @RequestParam (required = false) String jobTitle) {
-
-        userService.patchUser(id, username, password, firstName, jobTitle);
-        return new Responses ("User updated successfully");
-
-    }
     @PutMapping ("/update")
     @ResponseBody
     public Responses updateUser (@RequestBody User user) {

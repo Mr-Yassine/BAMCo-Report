@@ -25,10 +25,9 @@ public class ProfileDTO {
     private String description;
     private LocalDate creationDate;
     private LocalDate lastUpdate;
+
+
     private User lastUpdateBy;
-
-
-
     private User createdBy;
 
 }

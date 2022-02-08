@@ -8,6 +8,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Profile {
+public class Profile implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -39,17 +40,6 @@ public class Profile {
     @JoinColumn(name = "createdBy", referencedColumnName = "id")
     private User createdBy;
 
-
-
-
-    public Profile(Long id, String name, String description, LocalDate creationDate, LocalDate lastUpdate, User lastUpdateBy) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.creationDate = creationDate;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdateBy = lastUpdateBy;
-    }
 
 
 

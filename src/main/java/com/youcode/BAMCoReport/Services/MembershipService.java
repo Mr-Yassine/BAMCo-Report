@@ -5,6 +5,7 @@ import com.youcode.BAMCoReport.DTO.Services.IMapClassWithDto;
 import com.youcode.BAMCoReport.Entities.User;
 import com.youcode.BAMCoReport.Entities.UserMembership;
 import com.youcode.BAMCoReport.Repositories.IMembershipRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-
+@Slf4j
 @Service
 public class MembershipService {
 
@@ -50,6 +51,7 @@ public class MembershipService {
             throw new IllegalStateException("This id " + membership.getId() + " is already taken");
         }
 
+        log.info("Membership added successfully");
         membershipRepository.save(membership);
     }
 
@@ -60,6 +62,7 @@ public class MembershipService {
         if (!exists) {
             throw new IllegalStateException("Membership with id " + id + " does not exists");
         }
+        log.info("Membership deleted successfully");
         membershipRepository.deleteById(id);
     }
 

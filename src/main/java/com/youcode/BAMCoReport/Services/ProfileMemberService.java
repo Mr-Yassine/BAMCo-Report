@@ -19,6 +19,7 @@ public class ProfileMemberService {
     @Autowired
     IMapClassWithDto<ProfileMember, ProfileMemberDTO> profileMemberMapping;
 
+    @Autowired
     public ProfileMemberService(IProfileMemberRepository profileMemberRepository) {
         this.profileMemberRepository = profileMemberRepository;
     }

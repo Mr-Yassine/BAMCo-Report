@@ -2,6 +2,7 @@ package com.youcode.BAMCoReport.Controllers;
 
 import com.youcode.BAMCoReport.DTO.Models.RoleDTO;
 import com.youcode.BAMCoReport.Entities.Role;
+import com.youcode.BAMCoReport.Entities.User;
 import com.youcode.BAMCoReport.Responses.Responses;
 import com.youcode.BAMCoReport.Services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,12 @@ import java.util.List;
 public class RoleController {
 
 
+    private final RoleService roleService;
+
     @Autowired
-    RoleService roleService;
+    public RoleController(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
 
     //Get methods
@@ -45,16 +50,11 @@ public class RoleController {
 
 
     //Update method
-    @PutMapping(path = "/update/{id}")
+    @PutMapping ("/update")
     @ResponseBody
-    public Responses UpdateRole (
-            @PathVariable ("id") Long id,
-            @RequestParam (required = false) String name,
-            @RequestParam (required = false) String description) {
-
-        roleService.updateRole(id, name, description);
-        return new Responses ("Role Updated successfully");
-
+    public Responses updateRole (@RequestBody Role role) {
+        roleService.updateRole(role);
+        return new Responses ("Role updated successfully");
     }
 
 

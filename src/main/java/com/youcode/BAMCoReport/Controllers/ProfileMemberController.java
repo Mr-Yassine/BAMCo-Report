@@ -15,9 +15,10 @@ import java.util.List;
 public class ProfileMemberController {
 
 
-    @Autowired
+
     private final ProfileMemberService profileMemberService;
 
+    @Autowired
     public ProfileMemberController(ProfileMemberService profileMemberService) {
         this.profileMemberService = profileMemberService;
     }

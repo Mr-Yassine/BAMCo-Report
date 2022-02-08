@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserMembership {
+public class UserMembership implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,7 +31,7 @@ public class UserMembership {
     @JoinColumn(name = "groupId")
     private Group groupId;
     @ManyToOne
-    @JoinColumn(name = "assignedBy")
+    @JoinColumn(name = "assignedBy", referencedColumnName = "id")
     private User assignedBy;
     @CreationTimestamp
     private LocalDate assignedDate;

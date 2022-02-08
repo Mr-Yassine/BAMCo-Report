@@ -4,14 +4,17 @@ import com.youcode.BAMCoReport.DTO.Models.RoleDTO;
 import com.youcode.BAMCoReport.DTO.Services.IMapClassWithDto;
 import com.youcode.BAMCoReport.Entities.Role;
 import com.youcode.BAMCoReport.Repositories.IRoleRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.transaction.Transactional;
+
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
+
+@Slf4j
 @Service
 public class RoleService {
 
@@ -39,32 +42,23 @@ public class RoleService {
     public void addNewRole(Role role) {
         Optional<Role> roleOptional = roleRepository.findRoleByName(role.getName());
 
-        if(roleOptional.isPresent()) {
+        if (roleOptional.isPresent()) {
             throw new IllegalStateException("This name " + role.getName() + " is already taken");
         }
 
         roleRepository.save(role);
-
+        log.info("Role added successfully");
     }
 
 
     //update method
-    @Transactional
-    public void updateRole(Long id, String name, String description) {
-
-        Role role = roleRepository.findById(id).orElseThrow(
-                ()-> new IllegalStateException("Role with id " + id + " does not exists")
+    public void updateRole(@RequestBody Role role) {
+        roleRepository.findRoleById(role.getId()).orElseThrow(
+                ()-> new IllegalStateException("Role with id " + role.getId() + " does not exists")
         );
 
-
-        if (name != null && name.length() > 0 && !Objects.equals(role.getName(), name)) {
-            role.setName(name);
-        }
-
-        if (description != null && description.length() > 0 && !Objects.equals(role.getDescription(), description)) {
-            role.setDescription(description);
-        }
-
+        roleRepository.save(role);
+        log.info("Role updated successfully");
     }
 
 
@@ -75,6 +69,8 @@ public class RoleService {
             throw new IllegalStateException("Role with id " + id + " does not exists");
         }
         roleRepository.deleteById(id);
+        log.info("Role deleted successfully");
     }
+
 
 }

@@ -14,6 +14,7 @@ import java.util.List;
 @RequestMapping(path = "/api/profile")
 public class ProfileController {
 
+
     private final ProfileService profileService;
 
     @Autowired

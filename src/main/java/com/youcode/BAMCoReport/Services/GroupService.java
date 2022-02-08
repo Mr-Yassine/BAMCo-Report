@@ -4,14 +4,16 @@ import com.youcode.BAMCoReport.DTO.Models.GroupDTO;
 import com.youcode.BAMCoReport.DTO.Services.IMapClassWithDto;
 import com.youcode.BAMCoReport.Entities.Group;
 import com.youcode.BAMCoReport.Repositories.IGroupRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
+
+@Slf4j
 @Service
 public class GroupService {
 
@@ -49,10 +51,23 @@ public class GroupService {
         }
 
         groupRepository.save(group);
+        log.info("Group added successfully");
     }
 
 
 
+
+
+    //update method
+    public void updateGroup(@RequestBody Group group) {
+
+        groupRepository.findById(group.getId()).orElseThrow(
+                ()-> new IllegalStateException("Group with id " + group.getId() + " does not exists")
+        );
+
+        groupRepository.save(group);
+        log.info("Group updated successfully");
+    }
 
 
 
@@ -64,35 +79,7 @@ public class GroupService {
             throw new IllegalStateException("Group with id " + id + " does not exists");
         }
         groupRepository.deleteById(id);
-    }
-
-
-
-
-
-    //update method
-    @Transactional
-    public void updateGroup(Long id, String name) {
-
-        Group group = groupRepository.findById(id).orElseThrow(
-                ()-> new IllegalStateException("Group with id " + id + " does not exists")
-        );
-
-
-
-
-        if (name != null && name.length() > 0 && !Objects.equals(group.getName(), name)) {
-
-            Optional<Group> groupOptional = groupRepository.findGroupByName(name);
-
-            if (groupOptional.isPresent()) {
-                throw new IllegalStateException ("There is already a group with " +name+ " username");
-            }
-
-            group.setName(name);
-        }
-
-
+        log.info("Group deleted successfully");
     }
 
 

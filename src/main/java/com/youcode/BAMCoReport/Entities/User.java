@@ -54,7 +54,7 @@ public class User implements Serializable {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name="managerUserId")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User managerUserId;
 

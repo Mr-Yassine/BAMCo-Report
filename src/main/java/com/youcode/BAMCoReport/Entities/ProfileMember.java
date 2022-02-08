@@ -1,9 +1,11 @@
 package com.youcode.BAMCoReport.Entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
@@ -13,24 +15,33 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProfileMember {
+public class ProfileMember implements Serializable {
 
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
-    @JoinColumn(name = "profileId")
+    @JoinColumn(name = "profileId", referencedColumnName = "id")
     private Profile profileId;
+
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", referencedColumnName = "id")
     private User userId;
+
     @ManyToOne
-    @JoinColumn(name = "groupId")
+    @JoinColumn(name = "groupId", referencedColumnName = "id")
     private Group groupId;
+
     @ManyToOne
-    @JoinColumn(name = "roleId")
+    @JoinColumn(name = "roleId", referencedColumnName = "id")
     private Role roleId;
+
+    @ManyToOne()
+    @JoinColumn(name = "createdBy", referencedColumnName = "id")
+    private User createdBy;
+
 
 
     @Override

@@ -66,54 +66,14 @@ public class UserService {
 
 
 
-    //update method
-    @Transactional
-    public void patchUser(Long id, String username, String password, String firstName, String jobTitle) {
+     //update method
+     public void updateUser(@RequestBody User user) {
 
-        User user = userRepository.findById(id).orElseThrow(
-                ()-> new IllegalStateException("User with id " + id + " does not exists")
+        userRepository.findById(user.getId()).orElseThrow(
+                ()-> new IllegalStateException("User with id " + user.getId() + " does not exists")
         );
 
-
-        if (username != null && username.length() > 0 && !Objects.equals(user.getUsername(), username)) {
-
-            Optional<User> userOptional = userRepository.findUserByUsername(username);
-
-            if (userOptional.isPresent()) {
-                throw new IllegalStateException ("There is already a user with " +username+ " username");
-            }
-
-            user.setUsername(username);
-            log.info("User username updated successfully");
-        }
-
-        if (password != null && password.length() > 0 && !Objects.equals(user.getPassword(), password)) {
-            user.setPassword(password);
-            log.info("User password updated successfully");
-        }
-
-        if (firstName != null && firstName.length() > 0 && !Objects.equals(user.getFirstName(), firstName)) {
-            user.setFirstName(firstName);
-            log.info("User firstname updated successfully");
-        }
-
-        if (jobTitle != null && jobTitle.length() > 0 && !Objects.equals(user.getJobTitle(), jobTitle)) {
-            user.setJobTitle(jobTitle);
-            log.info("User jobTitle updated successfully");
-        }
-
-
-
-        log.info("User's content updated successfully");
-    }
-
-
-    public void updateUser(@RequestBody User u) {
-        userRepository.findById(u.getId()).orElseThrow(
-                ()-> new IllegalStateException("User with id " + u.getId() + " does not exists")
-        );
-
-        userRepository.save(u);
+        userRepository.save(user);
         log.info("User updated successfully");
     }
 

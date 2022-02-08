@@ -1,12 +1,14 @@
 package com.youcode.BAMCoReport.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
@@ -17,10 +19,11 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Group {
+public class Group implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long id;
     private String name;
     private String parentPath;
@@ -38,14 +41,7 @@ public class Group {
     private User createdBy;
 
 
-    public Group(Long id, String name, String description, LocalDate creationDate, LocalDate lastUpdate, User createdBy) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.creationDate = creationDate;
-        this.lastUpdate = lastUpdate;
-        this.createdBy = createdBy;
-    }
+
 
     @Override
     public String toString() {

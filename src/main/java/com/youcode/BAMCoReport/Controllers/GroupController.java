@@ -25,6 +25,7 @@ public class GroupController {
 
 
 
+    //Get methods
     @GetMapping
     public List<GroupDTO> getGroups() {
         return groupService.getGroups();
@@ -38,6 +39,7 @@ public class GroupController {
 
 
 
+    //Post method
     @PostMapping("/addGroup")
     @ResponseBody
     public Responses addNewGroup (@RequestBody Group group) {
@@ -48,17 +50,16 @@ public class GroupController {
 
 
 
-
-    @PutMapping(path = "/update/{id}")
+    //update method
+    @PutMapping ("/update")
     @ResponseBody
-    public Responses UpdateGroup (
-            @PathVariable ("id") Long id,
-            @RequestParam (required = false) String name) {
-
-        groupService.updateGroup(id, name);
+    public Responses updateGroup (@RequestBody Group group) {
+        groupService.updateGroup(group);
         return new Responses ("Group updated successfully");
-
     }
+
+
+
 
     @DeleteMapping(path = "/delete/{id}")
     @ResponseBody

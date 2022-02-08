@@ -1,9 +1,12 @@
 package com.youcode.BAMCoReport.Services;
 
+import com.youcode.BAMCoReport.DTO.Models.MembershipDTO;
 import com.youcode.BAMCoReport.DTO.Models.ProfileDTO;
 import com.youcode.BAMCoReport.DTO.Services.IMapClassWithDto;
 import com.youcode.BAMCoReport.Entities.Profile;
 import com.youcode.BAMCoReport.Entities.User;
+import com.youcode.BAMCoReport.Entities.UserMembership;
+import com.youcode.BAMCoReport.Repositories.IMembershipRepository;
 import com.youcode.BAMCoReport.Repositories.IProfileRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +22,18 @@ import java.util.Optional;
 @Service
 public class ProfileService {
 
+
+    private final IProfileRepository profileRepository;
+
+
     @Autowired
     IMapClassWithDto<Profile, ProfileDTO> profileMapping;
 
-    @Autowired
-    IProfileRepository profileRepository;
 
+    @Autowired
+    public ProfileService(IProfileRepository profileRepository) {
+        this.profileRepository = profileRepository;
+    }
 
 
     //Get method
