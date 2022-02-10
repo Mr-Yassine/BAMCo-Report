@@ -56,11 +56,7 @@ public class UserContactInfo implements Serializable {
     private User user_id;
 
 
-    public UserContactInfo(String email, String phone, User user_id) {
-        this.email = email;
-        this.phone = phone;
-        this.user_id = user_id;
-    }
+
 
     @Override
     public String toString() {

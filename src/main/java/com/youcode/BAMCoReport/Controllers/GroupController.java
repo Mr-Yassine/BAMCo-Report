@@ -40,7 +40,7 @@ public class GroupController {
 
 
     //Post method
-    @PostMapping("/addGroup")
+    @PostMapping("/add")
     @ResponseBody
     public Responses addNewGroup (@RequestBody Group group) {
         groupService.addNewGroup(group);

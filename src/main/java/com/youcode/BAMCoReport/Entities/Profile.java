@@ -31,6 +31,8 @@ public class Profile implements Serializable {
     private LocalDate creationDate;
     @UpdateTimestamp
     private LocalDate lastUpdate;
+
+
     @ManyToOne()
     @JoinColumn(name = "lastUpdateBy", referencedColumnName = "id")
     private User lastUpdateBy;

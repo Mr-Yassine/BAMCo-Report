@@ -24,8 +24,6 @@ public class UserService {
 
     @Autowired
     IMapClassWithDto<User, UserDTO> userMapping;
-
-
     @Autowired
     IUserRepository userRepository;
 

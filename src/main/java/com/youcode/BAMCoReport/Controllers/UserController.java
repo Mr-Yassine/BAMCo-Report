@@ -5,12 +5,10 @@ import com.youcode.BAMCoReport.Entities.User;
 import com.youcode.BAMCoReport.Responses.Responses;
 import com.youcode.BAMCoReport.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.io.IOException;
 import java.util.List;
 
 
@@ -19,10 +17,12 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -40,10 +40,12 @@ public class UserController {
 
 
 
+
     //Post method
     @PostMapping("/add")
     @ResponseBody
     public Responses addNewUser (@RequestBody User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.addNewUser(user);
         return new Responses ("User added successfully");
     }

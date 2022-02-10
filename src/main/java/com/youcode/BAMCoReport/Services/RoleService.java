@@ -61,7 +61,6 @@ public class RoleService {
         log.info("Role updated successfully");
     }
 
-
     //delete method
     public void deleteRole(Long id) {
         boolean exists = roleRepository.existsById(id);
@@ -72,5 +71,12 @@ public class RoleService {
         log.info("Role deleted successfully");
     }
 
+
+
+    public RoleDTO findById(Long id) {
+        Role role = roleRepository.findById(id).get();
+        return roleMapping.convertToDto(role, RoleDTO.class);
+
+    }
 
 }
