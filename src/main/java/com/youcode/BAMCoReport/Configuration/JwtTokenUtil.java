@@ -16,7 +16,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 
-@ComponentScan
 @Component
 public class JwtTokenUtil implements Serializable {
 

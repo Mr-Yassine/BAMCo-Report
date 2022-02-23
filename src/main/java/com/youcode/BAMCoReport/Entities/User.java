@@ -1,6 +1,7 @@
 package com.youcode.BAMCoReport.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.youcode.BAMCoReport.DTO.Models.ContactInfoDTO;
 import com.youcode.BAMCoReport.DTO.Models.UserDTO;
@@ -13,6 +14,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -69,6 +71,10 @@ public class User implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private UserContactInfo contactInfo;
 
+
+    @OneToMany(targetEntity = Reject.class, cascade = CascadeType.ALL, mappedBy = "takenBy")
+    @JsonIgnore
+    private List<Reject> reject;
 
 
 }

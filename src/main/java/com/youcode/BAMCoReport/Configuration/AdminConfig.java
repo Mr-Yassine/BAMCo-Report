@@ -4,10 +4,7 @@ import com.youcode.BAMCoReport.Entities.Group;
 import com.youcode.BAMCoReport.Entities.Role;
 import com.youcode.BAMCoReport.Entities.User;
 import com.youcode.BAMCoReport.Entities.UserMembership;
-import com.youcode.BAMCoReport.Repositories.IGroupRepository;
-import com.youcode.BAMCoReport.Repositories.IMembershipRepository;
-import com.youcode.BAMCoReport.Repositories.IRoleRepository;
-import com.youcode.BAMCoReport.Repositories.IUserRepository;
+import com.youcode.BAMCoReport.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -48,6 +45,7 @@ public class AdminConfig {
                     "Super Admin",
                     LocalDate.of(2022, FEBRUARY, 2),
                     LocalDate.of(2022, FEBRUARY, 6),
+                    null,
                     null,
                     null,
                     null,
