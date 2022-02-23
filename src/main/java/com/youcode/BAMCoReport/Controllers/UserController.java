@@ -61,6 +61,8 @@ public class UserController {
     }
 
 
+
+
     //Delete method
     @DeleteMapping(path = "/delete/{id}")
     @ResponseBody

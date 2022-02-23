@@ -94,7 +94,7 @@ public class RejectService {
         );
 
         rejectRepository.save(reject);
-        log.info("User updated successfully");
+        log.info("Reject updated successfully");
     }
 
 
@@ -104,7 +104,7 @@ public class RejectService {
             throw new IllegalStateException("Reject with id " + id + " does not exists");
         }
         rejectRepository.deleteById(id);
-        log.info("Reject deleted successfully", HttpStatus.OK);
+        log.info("Reject deleted successfully");
     }
 
 
