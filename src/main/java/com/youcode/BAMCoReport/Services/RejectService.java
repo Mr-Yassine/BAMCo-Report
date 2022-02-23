@@ -98,7 +98,7 @@ public class RejectService {
     }
 
 
-    public ResponseEntity<String> deleteReject(Long id) {
+    public void deleteReject(Long id) {
         boolean exists = rejectRepository.existsById(id);
         if (!exists) {
             throw new IllegalStateException("Reject with id " + id + " does not exists");
