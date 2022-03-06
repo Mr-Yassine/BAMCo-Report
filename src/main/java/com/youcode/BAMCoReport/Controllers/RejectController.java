@@ -87,8 +87,8 @@ public class RejectController {
 
     //Update method
     @ApiOperation(
-            value = "Update Reject ",
-            notes = "Update a specific reject "
+            value = "Update Reject",
+            notes = "Update a specific reject"
     )
     @PutMapping("/update")
     @ResponseBody
