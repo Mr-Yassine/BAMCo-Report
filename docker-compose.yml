@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  ### Postgres Database ###
+  postgres:
+    container_name: postgres_db
+    image: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: bamDb
+    #networks:
+    #  - mynet
+
+  ### API Spring Boot ###
+  api:
+    container_name: bamcorepport_dockerimage
+    #image: bamcorepport_dockerimage
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "80:8080"
+    restart: on-failure
+    depends_on:
+      - postgres
+    #links:
+    #  - "postgres:postgres_db"
+    environment:
+      HOST_NAME: postgres
+      PORT_NUM: 5432
+      DATABASE_NAME: bamDb
+      PS_USERNAME: postgres
+      PS_PW: 1234
+
+
+volumes:
+  pgdata: {}
